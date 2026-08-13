@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AvtoTek Media Hub</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="card">
+      <h2>AvtoTek Media Hub</h2>
+      <p class="subtitle">Rasmlarni .webp qilib yuklash va post yaratish</p>
+
+      <!-- Forma -->
+      <div class="form-group">
+        <input
+          type="text"
+          id="carName"
+          placeholder="Nomi (masalan: Chevrolet Gentra)"
+        />
+        <div class="row">
+          <input type="number" id="carPrice" placeholder="Narxi ($)" />
+          <input type="number" id="carYear" placeholder="Yili (2022)" />
+        </div>
+        <div class="row">
+          <input type="number" id="carMileage" placeholder="Probeg (km)" />
+          <input
+            type="text"
+            id="carLocation"
+            placeholder="Joy (Toshkent sh.)"
+            value="Toshkent sh."
+          />
+        </div>
+      </div>
+
+      <!-- Rasm Tanlash -->
+      <div class="upload-box">
+        <label for="imageInput" class="upload-label">
+          <span>📸 Rasmlarni tanlang (.webp avto)</span>
+        </label>
+        <input type="file" id="imageInput" multiple accept="image/*" />
+      </div>
+
+      <!-- Status -->
+      <div id="status" class="status-text"></div>
+
+      <!-- Yuklangan rasmlar previyusi -->
+      <div id="previewContainer" class="preview-grid"></div>
+
+      <!-- Tayyor Post Matni -->
+      <textarea
+        id="resultText"
+        readonly
+        placeholder="Tayyor post shu yerda ko'rinadi..."
+      ></textarea>
+
+      <!-- Nusxalash tugmasi -->
+      <button id="copyBtn" onclick="copyPost()">📋 Postni Nusxalash</button>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
