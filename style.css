@@ -16,11 +16,18 @@ body {
 .card {
   background-color: #1e293b;
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   border-radius: 24px;
   padding: 20px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   border: 1px solid #334155;
+}
+
+.header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 h2 {
@@ -32,14 +39,42 @@ h2 {
 .subtitle {
   color: #94a3b8;
   font-size: 12px;
-  margin-bottom: 20px;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background-color: rgba(56, 189, 248, 0.1);
+  border: 1px solid #334155;
+  color: #38bdf8;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.icon-btn:active {
+  transform: scale(0.92);
+}
+
+.section-title {
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 16px 0 8px;
+}
+
+.section-title:first-of-type {
+  margin-top: 0;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 16px;
 }
 
 .row {
@@ -47,7 +82,14 @@ h2 {
   gap: 10px;
 }
 
-input {
+.row > * {
+  flex: 1;
+  min-width: 0;
+}
+
+input,
+select,
+textarea {
   width: 100%;
   padding: 12px;
   background-color: #0f172a;
@@ -56,14 +98,42 @@ input {
   color: #fff;
   font-size: 14px;
   outline: none;
+  font-family: inherit;
 }
 
-input:focus {
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'><path d='M4 6l4 4 4-4H4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+
+select option {
+  background-color: #0f172a;
+  color: #fff;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #64748b;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
   border-color: #38bdf8;
 }
 
+.desc-input {
+  height: 70px;
+  resize: none;
+}
+
 .upload-box {
-  margin-bottom: 16px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .upload-label {
@@ -86,28 +156,41 @@ input:focus {
 .status-text {
   font-size: 12px;
   color: #fbbf24;
-  margin-bottom: 10px;
+  margin: 10px 0;
   text-align: center;
+  min-height: 14px;
 }
 
 .preview-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 8px;
   margin-bottom: 16px;
 }
 
-.preview-grid img {
+.preview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.preview-item img {
   width: 100%;
-  height: 70px;
+  height: 60px;
   object-fit: cover;
   border-radius: 10px;
   border: 1px solid #334155;
 }
 
-textarea {
+.preview-label {
+  font-size: 10px;
+  color: #64748b;
+}
+
+textarea#resultText {
   width: 100%;
-  height: 140px;
+  height: 150px;
   background-color: #0f172a;
   border: 1px solid #334155;
   border-radius: 12px;
@@ -120,16 +203,30 @@ textarea {
   outline: none;
 }
 
+.btn-row {
+  display: flex;
+  gap: 10px;
+}
+
 button {
-  width: 100%;
   padding: 14px;
-  background-color: #0284c7;
   color: white;
   border: none;
   border-radius: 14px;
   font-size: 15px;
   font-weight: bold;
   cursor: pointer;
+}
+
+#copyBtn {
+  flex: 2;
+  background-color: #0284c7;
+}
+
+.secondary-btn {
+  flex: 1;
+  background-color: #334155;
+  color: #cbd5e1;
 }
 
 button:active {

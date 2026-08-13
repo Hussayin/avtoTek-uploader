@@ -8,15 +8,28 @@
   </head>
   <body>
     <div class="card">
-      <h2>AvtoTek Media Hub</h2>
-      <p class="subtitle">Rasmlarni .webp qilib yuklash va post yaratish</p>
+      <div class="header-row">
+        <div>
+          <h2>AvtoTek Media Hub</h2>
+          <p class="subtitle">Rasmlarni .webp qilib yuklash va post yaratish</p>
+        </div>
+        <button
+          id="resetBtn"
+          class="icon-btn"
+          onclick="resetForm()"
+          title="Hammasini tozalash"
+        >
+          &#x21bb;
+        </button>
+      </div>
 
-      <!-- Forma -->
+      <!-- Asosiy ma'lumotlar -->
+      <div class="section-title">Asosiy ma'lumotlar</div>
       <div class="form-group">
         <input
           type="text"
           id="carName"
-          placeholder="Nomi (masalan: Chevrolet Gentra)"
+          placeholder="Nomi (masalan: Spark 1.5 turbo)"
         />
         <div class="row">
           <input type="number" id="carPrice" placeholder="Narxi ($)" />
@@ -33,10 +46,57 @@
         </div>
       </div>
 
+      <!-- Texnik xususiyatlar -->
+      <div class="section-title">Texnik xususiyatlar</div>
+      <div class="form-group">
+        <div class="row">
+          <select id="carGearbox">
+            <option value="">Korobka</option>
+            <option value="avtomat">Avtomat</option>
+            <option value="mexanika">Mexanika</option>
+          </select>
+          <input type="text" id="carColor" placeholder="Rangi (oq)" />
+        </div>
+        <div class="row">
+          <input type="text" id="carEngine" placeholder="Motor hajmi (1.5)" />
+          <input
+            type="text"
+            id="carFuel"
+            placeholder="Yoqilg'i (benzin, gaz+benzin va h.k.)"
+          />
+        </div>
+      </div>
+
+      <!-- Video / ijtimoiy tarmoq -->
+      <div class="section-title">Tekshiruv videosi</div>
+      <div class="form-group">
+        <input
+          type="text"
+          id="carInstagram"
+          placeholder="Instagram link (ixtiyoriy)"
+        />
+        <input
+          type="text"
+          id="carYoutube"
+          placeholder="Youtube link (ixtiyoriy)"
+        />
+      </div>
+
+      <!-- Tavsif -->
+      <div class="section-title">Tavsif</div>
+      <div class="form-group">
+        <textarea
+          id="carDescription"
+          class="desc-input"
+          placeholder="Mashina haqida qisqacha ma'lumot..."
+        ></textarea>
+      </div>
+
       <!-- Rasm Tanlash -->
+      <div class="section-title">Rasmlar (kamida 4 ta)</div>
       <div class="upload-box">
         <label for="imageInput" class="upload-label">
-          <span>📸 Rasmlarni tanlang (.webp avto)</span>
+          <span>&#128247; Rasmlarni tanlang (.webp avto)</span>
         </label>
         <input type="file" id="imageInput" multiple accept="image/*" />
       </div>
@@ -48,14 +108,22 @@
       <div id="previewContainer" class="preview-grid"></div>
 
       <!-- Tayyor Post Matni -->
+      <div class="section-title">Tayyor post</div>
       <textarea
         id="resultText"
         readonly
         placeholder="Tayyor post shu yerda ko'rinadi..."
       ></textarea>
 
-      <!-- Nusxalash tugmasi -->
-      <button id="copyBtn" onclick="copyPost()">📋 Postni Nusxalash</button>
+      <!-- Tugmalar -->
+      <div class="btn-row">
+        <button id="copyBtn" onclick="copyPost()">
+          &#128203; Postni Nusxalash
+        </button>
+        <button id="resetBtnBottom" class="secondary-btn" onclick="resetForm()">
+          &#x21bb; Yangi post
+        </button>
+      </div>
     </div>
 
     <script src="script.js"></script>
