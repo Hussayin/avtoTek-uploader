@@ -5,6 +5,26 @@ const imageInput = document.getElementById("imageInput");
 const statusDiv = document.getElementById("status");
 const previewContainer = document.getElementById("previewContainer");
 const resultText = document.getElementById("resultText");
+const carIdInput = document.getElementById("carId");
+
+// =========================================================
+// AVTOMATIK ID GENERATSIYA QILISH
+//
+// Brauzerning localStorage'ida oxirgi ID raqamini saqlaymiz,
+// har safar sahifa ochilganda (yoki reset bosilganda) 1 taga
+// oshirib, "AT-0001" ko'rinishida beramiz.
+// =========================================================
+function generateNextId() {
+  const STORAGE_KEY = "avtotek_last_id";
+  let lastNumber = parseInt(localStorage.getItem(STORAGE_KEY) || "0", 10);
+  lastNumber += 1;
+  localStorage.setItem(STORAGE_KEY, String(lastNumber));
+  return "AT-" + String(lastNumber).padStart(4, "0");
+}
+
+// Sahifa ochilganda darrov ID beramiz
+carIdInput.value = generateNextId();
+updatePostText();
 
 // =========================================================
 // Barcha input/select/textarea o'zgarganda postni yangilash
@@ -126,7 +146,9 @@ function convertToWebp(file) {
 // Telegram post matnini shakllantirish
 // =========================================================
 function updatePostText() {
+  const id = document.getElementById("carId").value.trim();
   const name = document.getElementById("carName").value.trim();
+  const vin = document.getElementById("carVin").value.trim();
   const price = document.getElementById("carPrice").value.trim();
   const year = document.getElementById("carYear").value.trim();
   const mileage = document.getElementById("carMileage").value.trim();
@@ -142,7 +164,9 @@ function updatePostText() {
 
   const lines = [];
 
+  lines.push(`ID: ${id}`);
   lines.push(`Nomi: ${name}`);
+  if (vin) lines.push(`VIN: ${vin}`);
   lines.push(`Narxi: ${price}`);
   lines.push(`Yili: ${year}`);
   lines.push(`Probeg: ${mileage}`);
@@ -185,6 +209,8 @@ function resetForm() {
     .forEach((el) => {
       if (el.id === "carLocation") {
         el.value = "Toshkent sh.";
+      } else if (el.id === "carId") {
+        el.value = generateNextId();
       } else if (el.id !== "resultText") {
         el.value = "";
       } else {

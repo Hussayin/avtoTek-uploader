@@ -26,6 +26,9 @@
       <!-- Asosiy ma'lumotlar -->
       <div class="section-title">Asosiy ma'lumotlar</div>
       <div class="form-group">
+        <div class="row">
+          <input type="text" id="carId" placeholder="ID (avtomatik)" />
+        </div>
         <input
           type="text"
           id="carName"
@@ -49,6 +52,7 @@
       <!-- Texnik xususiyatlar -->
       <div class="section-title">Texnik xususiyatlar</div>
       <div class="form-group">
+        <input type="text" id="carVin" placeholder="Seriya raqami (VIN)" />
         <div class="row">
           <select id="carGearbox">
             <option value="">Korobka</option>
@@ -59,11 +63,13 @@
         </div>
         <div class="row">
           <input type="text" id="carEngine" placeholder="Motor hajmi (1.5)" />
-          <input
-            type="text"
-            id="carFuel"
-            placeholder="Yoqilg'i (benzin, gaz+benzin va h.k.)"
-          />
+          <select id="carFuel">
+            <option value="">Yoqilg'i</option>
+            <option value="benzin">Benzin</option>
+            <option value="metan">Metan</option>
+            <option value="dizel">Dizel</option>
+            <option value="elektro">Elektro</option>
+          </select>
         </div>
       </div>
 
