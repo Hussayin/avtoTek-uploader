@@ -28,6 +28,11 @@
       <div class="form-group">
         <div class="row">
           <input type="text" id="carId" placeholder="ID (avtomatik)" />
+          <!-- Holat / Status tanlovi qo'shildi -->
+          <select id="carStatus">
+            <option value="active" selected>Holat: Active</option>
+            <option value="no-active">Holat: No-Active (Sotildi)</option>
+          </select>
         </div>
         <input
           type="text"
@@ -36,7 +41,7 @@
         />
         <div class="row">
           <input type="number" id="carPrice" placeholder="Narxi ($)" />
-          <input type="number" id="carYear" placeholder="Yili (2022)" />
+          <input type="number" id="carYear" placeholder="Yili (2024)" />
         </div>
         <div class="row">
           <input type="number" id="carMileage" placeholder="Probeg (km)" />

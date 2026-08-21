@@ -9,10 +9,6 @@ const carIdInput = document.getElementById("carId");
 
 // =========================================================
 // AVTOMATIK ID GENERATSIYA QILISH
-//
-// Brauzerning localStorage'ida oxirgi ID raqamini saqlaymiz,
-// har safar sahifa ochilganda (yoki reset bosilganda) 1 taga
-// oshirib, "AT-0001" ko'rinishida beramiz.
 // =========================================================
 function generateNextId() {
   const STORAGE_KEY = "avtotek_last_id";
@@ -46,10 +42,8 @@ imageInput.addEventListener("change", async (e) => {
 
   for (const file of files) {
     try {
-      // 1. Rasmni brauzerda .webp formatiga o'tkazish
       const webpBlob = await convertToWebp(file);
 
-      // 2. ImgBB ga yuklash
       const formData = new FormData();
       formData.append("image", webpBlob, "car.webp");
 
@@ -82,7 +76,6 @@ imageInput.addEventListener("change", async (e) => {
   statusDiv.innerText = "✅ Rasmlar muvaffaqiyatli yuklandi!" + minWarning;
   updatePostText();
 
-  // Inputni tozalash — bir xil faylni qayta tanlash imkoni uchun
   imageInput.value = "";
 });
 
@@ -147,6 +140,8 @@ function convertToWebp(file) {
 // =========================================================
 function updatePostText() {
   const id = document.getElementById("carId").value.trim();
+  const carStatusEl = document.getElementById("carStatus");
+  const status = carStatusEl ? carStatusEl.value : "active"; // Holatni olish
   const name = document.getElementById("carName").value.trim();
   const vin = document.getElementById("carVin").value.trim();
   const price = document.getElementById("carPrice").value.trim();
@@ -164,17 +159,18 @@ function updatePostText() {
 
   const lines = [];
 
-  lines.push(`ID: ${id}`);
-  lines.push(`Nomi: ${name}`);
+  if (id) lines.push(`ID: ${id}`);
+  lines.push(`Holat: ${status}`); // Postga 'Holat: active' deb qo'shish
+  if (name) lines.push(`Nomi: ${name}`);
   if (vin) lines.push(`VIN: ${vin}`);
-  lines.push(`Narxi: ${price}`);
-  lines.push(`Yili: ${year}`);
-  lines.push(`Probeg: ${mileage}`);
+  if (price) lines.push(`Narxi: ${price}`);
+  if (year) lines.push(`Yili: ${year}`);
+  if (mileage) lines.push(`Probeg: ${mileage}`);
   if (gearbox) lines.push(`Korobka: ${gearbox}`);
   if (color) lines.push(`Rangi: ${color}`);
   if (engine) lines.push(`Motor: ${engine}`);
   if (fuel) lines.push(`Yoqilgi: ${fuel}`);
-  lines.push(`Joy: ${location}`);
+  if (location) lines.push(`Joy: ${location}`);
   lines.push(`Sana: ${date}`);
   if (instagram) lines.push(`Instagram: ${instagram}`);
   if (youtube) lines.push(`Youtube: ${youtube}`);
@@ -219,12 +215,17 @@ function resetForm() {
     });
 
   document.querySelectorAll("select").forEach((el) => {
-    el.selectedIndex = 0;
+    if (el.id === "carStatus") {
+      el.value = "active"; // Reset qilinganda Holat qayta Active ga o'tadi
+    } else {
+      el.selectedIndex = 0;
+    }
   });
 
   uploadedImageUrls = [];
   previewContainer.innerHTML = "";
   statusDiv.innerText = "";
-  resultText.value = "";
   imageInput.value = "";
+
+  updatePostText(); // Qayta toza post matnini yaratish
 }
